@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import UserSync from "@/components/UserSync";
+import TanStackProvider from "@/components/providers/TanStackProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,28 +27,30 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      appearance={{
-        variables: {
-         colorPrimary: "#e78a53",
-      colorBackground: "#171717",
-      colorText: "#f5f5f5",
-      colorTextSecondary: "#a1a1aa",
-      colorInputBackground: "#262626",
-      colorInputText: "#f5f5f5",
-      colorNeutral: "#a1a1aa",
-      borderRadius: "0.75rem",
-        },
-      }}
-    >
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
-        >
-          <UserSync />
-          {children}
-        </body>
-      </html>
-    </ClerkProvider>
+    <TanStackProvider>
+      <ClerkProvider
+        appearance={{
+          variables: {
+            colorPrimary: "#e78a53",
+            colorBackground: "#171717",
+            colorText: "#f5f5f5",
+            colorTextSecondary: "#a1a1aa",
+            colorInputBackground: "#262626",
+            colorInputText: "#f5f5f5",
+            colorNeutral: "#a1a1aa",
+            borderRadius: "0.75rem",
+          },
+        }}
+      >
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
+          >
+            <UserSync />
+            {children}
+          </body>
+        </html>
+      </ClerkProvider>
+    </TanStackProvider>
   );
 }
