@@ -3,11 +3,11 @@ import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { EditIcon, MailIcon, PhoneIcon, PlusIcon, StethoscopeIcon } from "lucide-react";
 import { Button } from "../ui/button";
-import Image from "next/image";
 import { Badge } from "../ui/badge";
 import AddDoctorDialog from "./AddDoctorDialog";
 import EditDoctorDialog from "./EditDoctorDialog";
 import { Doctor } from "@prisma/client";
+import DoctorAvatar from "../DoctorAvatar";
 
 function DoctorsManagement() {
   const { data: doctors = [] } = useGetDoctors();
@@ -55,13 +55,7 @@ function DoctorsManagement() {
                 className="flex items-center justify-between p-4 bg-muted/30 rounded-xl border border-border/50"
               >
                 <div className="flex items-center gap-4">
-                  <Image
-                    src={doctor.imageUrl}
-                    alt={doctor.name}
-                    width={48}
-                    height={48}
-                    className="size-12 rounded-full object-cover ring-2 ring-background"
-                  />
+                  <DoctorAvatar name={doctor.name} gender={doctor.gender} />
 
                   <div>
                     <div className="font-semibold">{doctor.name}</div>
